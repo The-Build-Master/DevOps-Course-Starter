@@ -87,3 +87,4 @@ def remove_item(id):
         session['items'] = existing_items
 
     return item
+

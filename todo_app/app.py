@@ -42,3 +42,4 @@ def removeitem():
     # item = get_item(id)
     remove_item(id)
     return redirect(url_for('index'))
+
