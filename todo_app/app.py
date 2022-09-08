@@ -6,7 +6,7 @@ from flask import render_template
 
 from todo_app.flask_config import Config
 
-from todo_app.data.trello_items import get_cards, add_card, update_card
+from todo_app.data.trello_items import get_cards, add_card, update_card_done, update_card_todo
 
 from operator import itemgetter, attrgetter
 
@@ -29,7 +29,14 @@ def additem():
 @app.route('/completeitem', methods=['POST'])
 def completeitem():
     id = request.form.get('id')
-    update_card(id)
+    update_card_done(id)
+    url = url_for(id)
+    return redirect(url_for('index'))
+
+@app.route('/uncompleteitem', methods=['POST'])
+def uncompleteitem():
+    id = request.form.get('id')
+    update_card_todo(id)
     return redirect(url_for('index'))
 
 

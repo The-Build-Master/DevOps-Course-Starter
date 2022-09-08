@@ -85,7 +85,7 @@ def add_card(title):
 
     return status
 
-def update_card(id):
+def update_card_done(id):
     """
     Updates the card with the specified id to the 'Done' list.
 
@@ -97,6 +97,25 @@ def update_card(id):
     """
 
     done_list = get_idlist("Done")
+
+    response = requests.put(f"https://api.trello.com/1/cards/{id}?key={api_key}&token={api_token}&idList={done_list}")
+
+    status = response.status_code
+
+    return status
+
+def update_card_todo(id):
+    """
+    Updates the card with the specified id to the 'To Do' list.
+
+    Args:
+        id: The id of the card.
+
+    Returns:
+        item: The API response.
+    """
+
+    done_list = get_idlist("To Do")
 
     response = requests.put(f"https://api.trello.com/1/cards/{id}?key={api_key}&token={api_token}&idList={done_list}")
 

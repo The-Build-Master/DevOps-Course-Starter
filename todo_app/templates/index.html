@@ -14,7 +14,7 @@
         <!-- List the todo items here -->
         {% for item in items %}
           <li>
-            {{ item.id }} - {{ item.title }} - {{ item.status }}
+            {{ item.id }} - {{ item.title }} - {{ item.status }} 
           </li>
         {% endfor %}
       </ul>
@@ -41,13 +41,13 @@
     </div>
   </form>
 
-  <form action="/removeitem" method="post" class="form-example">
+  <form action="/uncompleteitem" method="post" class="form-example">
     <div class="form-example">
       <label for="name">Enter item Id: </label>
       <input type="text" name="id" id="id" required>
     </div>
     <div class="form-example">
-      <input type="submit" class="btn btn-danger" value="Remove">
+      <input type="submit" class="btn btn-danger" value="Uncomplete">
       <!-- Should this be a different id? -->
     </div>
   </form>
