@@ -6,18 +6,16 @@ from flask import render_template
 
 from todo_app.flask_config import Config
 
-from todo_app.data.session_items import get_items, get_item
-from todo_app.data.session_items import add_item, save_item, remove_item
+from todo_app.data.trello_items import get_cards, add_card, update_card
 
 from operator import itemgetter, attrgetter
 
 app = Flask(__name__)
 app.config.from_object(Config())
 
-
 @app.route('/')
 def index():
-    items = get_items()
+    items = get_cards()
     # sort the items before displaying them
     items = sorted(items, key=lambda x: x['status'], reverse=True)
     return render_template('index.html', items=items)
@@ -25,21 +23,13 @@ def index():
 @app.route('/additem', methods=['POST'])
 def additem():
     title = request.form.get('title')
-    add_item(title)
+    add_card(title)
     return redirect(url_for('index'))
 
 @app.route('/completeitem', methods=['POST'])
 def completeitem():
     id = request.form.get('id')
-    item = get_item(id)
-    item['status'] = "Completed"
-    save_item(item)
+    update_card(id)
     return redirect(url_for('index'))
 
-@app.route('/removeitem', methods=['POST'])
-def removeitem():
-    id = request.form.get('id')
-    # item = get_item(id)
-    remove_item(id)
-    return redirect(url_for('index'))
 
