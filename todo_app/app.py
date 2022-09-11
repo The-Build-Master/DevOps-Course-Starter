@@ -30,7 +30,6 @@ def additem():
 def completeitem():
     id = request.form.get('id')
     update_card_done(id)
-    url = url_for(id)
     return redirect(url_for('index'))
 
 @app.route('/uncompleteitem', methods=['POST'])
@@ -39,4 +38,14 @@ def uncompleteitem():
     update_card_todo(id)
     return redirect(url_for('index'))
 
+@app.route('/completecard', methods=['POST'])
+def completecard():
+    id = request.args['id']
+    status = request.args['status']
 
+    if status == 'To Do':
+        update_card_done(id)
+    else:
+        update_card_todo(id)
+    
+    return redirect(url_for('index'))

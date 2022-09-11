@@ -52,3 +52,29 @@ You should see output similar to the following:
  * Debugger PIN: 226-556-590
 ```
 Now visit [`http://localhost:5000/`](http://localhost:5000/) in your web browser to view the app.
+
+Module 2
+Using a suitable Internet Browser create a Trello account by going to:-
+https://trello.com/signup
+
+Once the account has been created obtain the API key and token by following the instructions given at:-
+https://trello.com/api-key
+
+The API key and token must be kept securely as this provides access to your account.
+They can be places in the project .env file which is not one of the files monitored by GIT.
+As they will be used in the project it is wise to provide suitable names which can then be retrieved by using the os.getenv() function
+
+To make request to the Trello APIs the Python 'Request' library will need to be installed and added to the poetry dependencies
+
+### Install the requests library (PowerShell)
+
+```powershell
+pip install requests
+```
+
+
+### Add the requests library to pyproject.toml dependencies (PowerShell)
+
+```powershell
+poetry add requests
+```

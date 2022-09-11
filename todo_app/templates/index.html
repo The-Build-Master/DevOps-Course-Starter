@@ -11,10 +11,11 @@
     <div class="col-md-12">
       <h2>Items</h2>
       <ul class="list-group mb-4">
-        <!-- List the todo items here -->
         {% for item in items %}
           <li>
-            {{ item.id }} - {{ item.title }} - {{ item.status }} 
+            <form action="/completecard?id={{item.id}}&status={{ item.status }}" method="post" class="form-example">
+              <input type="submit" class="btn btn-success" value="Complete"> {{ item.id }} - {{ item.title }} - {{ item.status }} 
+            </form>
           </li>
         {% endfor %}
       </ul>
@@ -48,7 +49,6 @@
     </div>
     <div class="form-example">
       <input type="submit" class="btn btn-danger" value="Uncomplete">
-      <!-- Should this be a different id? -->
     </div>
   </form>
 
