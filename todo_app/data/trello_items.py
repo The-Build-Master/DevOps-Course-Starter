@@ -1,13 +1,12 @@
-# Everything s assuming that there are no errors anywhere.
+# Everything is assuming that there are no errors anywhere.
 
 import requests
 import os
+from .class_item import Item
 
 api_key = os.getenv("APIKey")
 api_token = os.getenv("APIToken")
 board_id = os.getenv("BoardId")
-
-list_of_cards = []
 
 def get_idlist(name):
     """
@@ -38,9 +37,10 @@ def get_cards():
     Returns:
         list: The list of all relevant.
     """
-    response = requests.get(f"https://api.trello.com/1/boards/{board_id}/lists?key={api_key}&token={api_token}&cards=open&card_fields=id,name,idList")
 
-    list_of_cards.clear()
+    list_of_cards = []
+
+    response = requests.get(f"https://api.trello.com/1/boards/{board_id}/lists?key={api_key}&token={api_token}&cards=open&card_fields=id,name,idList")
 
     #now look for the to_do list
     response_json = response.json()
@@ -57,8 +57,8 @@ def get_cards():
                     "id": card["id"],
                     "status": list_name
                 }
-                list_of_cards.append(item)
-    
+                list_of_cards.append(Item.from_trello_card(card, trello_list)) 
+                
     return list_of_cards
 
 def add_card(title):
@@ -75,11 +75,16 @@ def add_card(title):
     todo_list = get_idlist("To Do")
 
     # set up the card details as required
-    details = "name=" + title
-    details = details + "&pos=top"
-    details = details + "&desc=This is a new card"
-
-    response = requests.post(f"https://api.trello.com/1/cards?idList={todo_list}&key={api_key}&token={api_token}&{details}")
+    body = {
+        'name': title,
+        'pos': 'top',
+        'desc': 'This is a new card',
+        'key': api_key,
+        'token': api_token,
+        'idList': todo_list
+    }
+    
+    response = requests.post("https://api.trello.com/1/cards", data = body)
 
     status = response.status_code
 

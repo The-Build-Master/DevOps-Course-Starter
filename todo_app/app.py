@@ -10,6 +10,8 @@ from todo_app.data.trello_items import get_cards, add_card, update_card_done, up
 
 from operator import itemgetter, attrgetter
 
+from todo_app.data.class_item import Item
+
 app = Flask(__name__)
 app.config.from_object(Config())
 
@@ -17,7 +19,7 @@ app.config.from_object(Config())
 def index():
     items = get_cards()
     # sort the items before displaying them
-    items = sorted(items, key=lambda x: x['status'], reverse=True)
+    # items = sorted(items, key=lambda x: x['status'], reverse=True)
     return render_template('index.html', items=items)
 
 @app.route('/additem', methods=['POST'])
