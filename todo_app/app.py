@@ -10,7 +10,7 @@ from todo_app.data.trello_items import get_cards, add_card, update_card_done, up
 
 from operator import itemgetter, attrgetter
 
-from todo_app.data.class_item import Item
+# from todo_app.data.class_item import Item
 
 app = Flask(__name__)
 app.config.from_object(Config())
@@ -40,14 +40,14 @@ def uncompleteitem():
     update_card_todo(id)
     return redirect(url_for('index'))
 
-@app.route('/completecard', methods=['POST'])
-def completecard():
-    id = request.args['id']
-    status = request.args['status']
+#@app.route('/completecard', methods=['POST'])
+#def completecard():
+#    id = request.args['id']
+#    status = request.args['status']
 
-    if status == 'To Do':
-        update_card_done(id)
-    else:
-        update_card_todo(id)
+    # if status == 'To Do':
+    #     update_card_done(id)
+    # else:
+    #     update_card_todo(id)
     
-    return redirect(url_for('index'))
+    # return redirect(url_for('index'))

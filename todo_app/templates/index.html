@@ -13,11 +13,17 @@
       <ul class="list-group mb-4">
         {% for item in items %}
           <li>
-            <form action="/completecard" method="post" class="form-example">
+            {% if item.status == "To Do" %}
+            <form action="/completeitem" method="post" class="form-example">
               <input type="text" value="{{ item.id }}" name="id" hidden />
-              <input type="text" value="{{ item.status }}" name="status" hidden />
               <input type="submit" class="btn btn-success" value="Complete"> {{ item.id }} - {{ item.name }} - {{ item.status }} 
             </form>
+            {% else %}
+            <form action="/uncompleteitem" method="post" class="form-example">
+              <input type="text" value="{{ item.id }}" name="id" hidden />
+              <input type="submit" class="btn btn-danger" value="Uncomplete"> {{ item.id }} - {{ item.name }} - {{ item.status }} 
+            </form>
+            {% endif %}
           </li>
         {% endfor %}
       </ul>
