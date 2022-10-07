@@ -78,3 +78,32 @@ pip install requests
 ```powershell
 poetry add requests
 ```
+
+Module 3
+
+We need to add 'pytest' to our project so that we can perform unit tests.
+To do this use the following command 
+
+```powershell
+poetry add pytest --dev
+```
+
+This should download it and also update pyproject.toml.
+
+The test is performed using the content of the test_view_model.py file which is split into two
+sections. The first section tests for items with a status of 'Done' and the second test for items
+with a status of 'To Do'
+In each section the same list of items is used, the first item has the status of 'To Do' and the
+second has the status of 'Done'
+Each test used an Action which is based upon a list of returned items as processed in the 
+view_model.py file which splits the items into one of two lists (one for each status being tested).
+The tests in each section confirms that there is only one item in the returned list, that it has
+the correct item id and then correct status.
+Other test can be performed by adding additional assert lines to the #Assert section.
+
+Test are run by selecting the 'Test explorer' icon in Visual Studio code (the beaker symbol),
+highlighting the required test either at the root level or further down the tree list 
+and then pressing the 'Run Test' icon (right pointing triangle)
+
+Successful test will be indicated by a green tick icon. Failures can be reviewed by high lighting
+any red lines and looking at the test response.
