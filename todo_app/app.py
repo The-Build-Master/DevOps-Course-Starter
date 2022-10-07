@@ -12,41 +12,33 @@ from operator import itemgetter, attrgetter
 
 from todo_app.data.view_model import ViewModel
 
-app = Flask(__name__)
-app.config.from_object(Config())
+def create_app():
+    app = Flask(__name__)
+    app.config.from_object(Config())
 
-@app.route('/')
-def index():
-    items = get_cards()
-    view_model = ViewModel(items)
-    return render_template('index.html', view_model = view_model)
+    @app.route('/')
+    def index():
+        items = get_cards()
+        view_model = ViewModel(items)
+        return render_template('index.html', view_model = view_model)
 
-@app.route('/additem', methods=['POST'])
-def additem():
-    title = request.form.get('title')
-    add_card(title)
-    return redirect(url_for('index'))
+    @app.route('/additem', methods=['POST'])
+    def additem():
+        title = request.form.get('title')
+        add_card(title)
+        return redirect(url_for('index'))
 
-@app.route('/completeitem', methods=['POST'])
-def completeitem():
-    id = request.form.get('id')
-    update_card_done(id)
-    return redirect(url_for('index'))
+    @app.route('/completeitem', methods=['POST'])
+    def completeitem():
+        id = request.form.get('id')
+        update_card_done(id)
+        return redirect(url_for('index'))
 
-@app.route('/uncompleteitem', methods=['POST'])
-def uncompleteitem():
-    id = request.form.get('id')
-    update_card_todo(id)
-    return redirect(url_for('index'))
+    @app.route('/uncompleteitem', methods=['POST'])
+    def uncompleteitem():
+        id = request.form.get('id')
+        update_card_todo(id)
+        return redirect(url_for('index'))
 
-#@app.route('/completecard', methods=['POST'])
-#def completecard():
-#    id = request.args['id']
-#    status = request.args['status']
+    return app
 
-    # if status == 'To Do':
-    #     update_card_done(id)
-    # else:
-    #     update_card_todo(id)
-    
-    # return redirect(url_for('index'))
