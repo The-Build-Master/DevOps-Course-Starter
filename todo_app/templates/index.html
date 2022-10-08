@@ -15,7 +15,7 @@
           <li>
             <form action="/completeitem" method="post" class="form-example">
               <input type="text" value="{{ item.id }}" name="id" hidden />
-              <input type="submit" class="btn btn-success" value="Complete"> {{ item.id }} - {{ item.name }} - {{ item.status }} 
+              <input type="submit" class="btn btn-success" value="Complete"> {{ item.name }} 
             </form>
           </li>
         {% endfor %}
@@ -27,65 +27,23 @@
           <li>
             <form action="/uncompleteitem" method="post" class="form-example">
               <input type="text" value="{{ item.id }}" name="id" hidden />
-              <input type="submit" class="btn btn-danger" value="Uncomplete"> {{ item.id }} - {{ item.name }} - {{ item.status }} 
+              <input type="submit" class="btn btn-danger" value="Uncomplete"> {{ item.name }} 
             </form>
           </li>
         {% endfor %}
       </ul>
 
-<!--
-      <h2>Items</h2>
-      <ul class="list-group mb-4">
-        {% for item in view_model.items %}
-          <li>
-            {% if item.status == "To Do" %}
-            <form action="/completeitem" method="post" class="form-example">
-              <input type="text" value="{{ item.id }}" name="id" hidden />
-              <input type="submit" class="btn btn-success" value="Complete"> {{ item.id }} - {{ item.name }} - {{ item.status }} 
-            </form>
-            {% else %}
-            <form action="/uncompleteitem" method="post" class="form-example">
-              <input type="text" value="{{ item.id }}" name="id" hidden />
-              <input type="submit" class="btn btn-danger" value="Uncomplete"> {{ item.id }} - {{ item.name }} - {{ item.status }} 
-            </form>
-            {% endif %}
-          </li>
-        {% endfor %}
-      </ul>
-    -->
     </div>
   </div>
 
   <form action="/additem" method="post" class="form-example">
     <div class="form-example">
-      <label for="name">Enter item Title: </label>
+      <label for="name">Enter new item title: </label>
       <input type="text" name="title" id="title" required>
     </div>
     <div class="form-example">
       <input type="submit" value="Submit">
     </div>
   </form>
-
-  <!--
-  <form action="/completeitem" method="post" class="form-example">
-    <div class="form-example">
-      <label for="name">Enter item Id: </label>
-      <input type="text" name="id" id="id" required>
-    </div>
-    <div class="form-example">
-      <input type="submit" class="btn btn-success" value="Complete">
-    </div>
-  </form>
-
-  <form action="/uncompleteitem" method="post" class="form-example">
-    <div class="form-example">
-      <label for="name">Enter item Id: </label>
-      <input type="text" name="id" id="id" required>
-    </div>
-    <div class="form-example">
-      <input type="submit" class="btn btn-danger" value="Uncomplete">
-    </div>
-  </form>
--->
 
 {% endblock %}

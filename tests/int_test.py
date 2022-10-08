@@ -46,3 +46,5 @@ def test_index_page(monkeypatch, client):
 
     assert response.status_code == 200
     assert 'Test card' in response.data.decode()
+
+

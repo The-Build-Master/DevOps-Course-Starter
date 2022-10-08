@@ -107,3 +107,45 @@ and then pressing the 'Run Test' icon (right pointing triangle)
 
 Successful test will be indicated by a green tick icon. Failures can be reviewed by high lighting
 any red lines and looking at the test response.
+
+For the integration test an new file '.env.test' needs to be created in the same directory as 
+the existing '.env' file. This new file will be a copy of the existing file but as it is to be 
+added to source control and 'secret' information such as API Keys, API Tokens must be removed 
+first.
+
+The content of the app.py file needs to be modified so that anything from the 'app = Flask(__name--)
+line to the end of all '@app.route' sections are encapsulated within a new 'def create_app():' 
+block.
+
+e.g. 
+# imports here
+
+def create_app():
+    app = Flask(__name__)
+    app.config.from_object(Config())
+    
+    # All the routes and setup code etc
+    # e.g.
+    # @app.route('/')
+    # def index():
+    #     ...
+    
+    return app
+
+The integration test file 'int_test.py' is located in a new 'tests' folder and it important that 
+this folder also contains a '__init__.py' file. This can be copied from on of the other existing
+folders
+
+The new 'int_test.py' file will contain the test client and will be defined as a 'fixture'.
+It will be necessary to import a number of other items into this test file such as the 'app.py',
+'dotenv' module to reference the '.env.temp' file as well as others related to 'os', 'pytest' 
+and 'requests' 
+
+A 'stub' is used instead of a direct call to Trello which returns a know package of data and it 
+is this data that asserts are made to ensure that the correct response is received.
+
+The test can be initiated from within Visual Studio Code using the 'Testing Explorer' option 
+which should return successful responses. 
+It should also be possible to start 'Git bash' in the root folder of the workspace and running 
+poetry run pytest or poetry run pytest path/to/test_file. In the latter case only a subset of all the tests maybe performed rather than a 'full' set.
+
