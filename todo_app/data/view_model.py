@@ -1,8 +1,8 @@
 from todo_app.data.class_item import Item
-
+from typing import List
 
 class ViewModel:
-    def __init__(self, items: list[Item]):
+    def __init__(self, items: List[Item]):
         self._items = items
 
     @property

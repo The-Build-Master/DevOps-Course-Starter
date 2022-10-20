@@ -8,8 +8,6 @@ from todo_app.flask_config import Config
 
 from todo_app.data.trello_items import get_cards, add_card, update_card_done, update_card_todo
 
-from operator import itemgetter, attrgetter
-
 from todo_app.data.view_model import ViewModel
 
 def create_app():

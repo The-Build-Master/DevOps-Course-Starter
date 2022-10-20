@@ -26,9 +26,11 @@ class StubResponse():
         return self.fake_response_data
 
 def stub(url, params={}):
-    test_board_id = os.environ.get('BoardId')
+    board_id = os.environ.get('BoardId')
+    api_key = os.environ.get('APIKey')
+    api_token = os.environ.get('APIToken')
 
-    if url == f'https://api.trello.com/1/boards/{test_board_id}/lists?key=34bdacc7fc4de7d2e6405a59f6cfee77&token=fdf719beb911960dcf0eb87d073f14435b4b11adc5028bef160be7bedef2d132&cards=open&card_fields=id,name,idList':
+    if url == f'https://api.trello.com/1/boards/{board_id}/lists?key={api_key}&token={api_token}&cards=open&card_fields=id,name,idList':
         fake_response_data = [{
             'id': '123abc',
             'name': 'To Do',

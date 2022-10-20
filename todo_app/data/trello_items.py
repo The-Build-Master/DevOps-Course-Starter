@@ -4,9 +4,14 @@ import requests
 import os
 from .class_item import Item
 
-api_key = os.getenv("APIKey")
-api_token = os.getenv("APIToken")
-board_id = os.getenv("BoardId")
+def api_key():
+    return os.getenv("APIKey")
+
+def api_token():
+    return os.getenv("APIToken")
+
+def board_id():
+    return os.getenv("BoardId")
 
 def get_idlist(name):
     """
@@ -16,7 +21,7 @@ def get_idlist(name):
         string: The idList id for the specified name.
     """
 
-    response = requests.get(f"https://api.trello.com/1/boards/{board_id}/lists?key={api_key}&token={api_token}&cards=open&card_fields=id,name")
+    response = requests.get(f"https://api.trello.com/1/boards/{board_id()}/lists?key={api_key()}&token={api_token()}&cards=open&card_fields=id,name")
 
     idlist = ""
 
@@ -37,10 +42,10 @@ def get_cards():
     Returns:
         list: The list of all relevant.
     """
-
+    
     list_of_cards = []
 
-    response = requests.get(f"https://api.trello.com/1/boards/{board_id}/lists?key={api_key}&token={api_token}&cards=open&card_fields=id,name,idList")
+    response = requests.get(f"https://api.trello.com/1/boards/{board_id()}/lists?key={api_key()}&token={api_token()}&cards=open&card_fields=id,name,idList")
 
     #now look for the to_do list
     response_json = response.json()
@@ -52,11 +57,6 @@ def get_cards():
         for card in cards:
             # only interested in 'To Do' and 'Done' lists
             if list_name == "To Do" or list_name == "Done":
-                item = {
-                    "title": card["name"],
-                    "id": card["id"],
-                    "status": list_name
-                }
                 list_of_cards.append(Item.from_trello_card(card, trello_list)) 
                 
     return list_of_cards
@@ -103,7 +103,7 @@ def update_card_done(id):
 
     done_list = get_idlist("Done")
 
-    response = requests.put(f"https://api.trello.com/1/cards/{id}?key={api_key}&token={api_token}&idList={done_list}")
+    response = requests.put(f"https://api.trello.com/1/cards/{id}?key={api_key()}&token={api_token()}&idList={done_list}")
 
     status = response.status_code
 
@@ -120,9 +120,9 @@ def update_card_todo(id):
         item: The API response.
     """
 
-    done_list = get_idlist("To Do")
+    todo_list = get_idlist("To Do")
 
-    response = requests.put(f"https://api.trello.com/1/cards/{id}?key={api_key}&token={api_token}&idList={done_list}")
+    response = requests.put(f"https://api.trello.com/1/cards/{id}?key={api_key()}&token={api_token()}&idList={todo_list}")
 
     status = response.status_code
 
