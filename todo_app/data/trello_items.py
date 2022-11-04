@@ -79,8 +79,8 @@ def add_card(title):
         'name': title,
         'pos': 'top',
         'desc': 'This is a new card',
-        'key': api_key,
-        'token': api_token,
+        'key': api_key(),
+        'token': api_token(),
         'idList': todo_list
     }
     
