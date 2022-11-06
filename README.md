@@ -126,3 +126,25 @@ which should return successful responses.
 It should also be possible to start 'Git bash' in the root folder of the workspace and running 
 poetry run pytest or poetry run pytest path/to/test_file. In the latter case only a subset of all the tests maybe performed rather than a 'full' set.
 
+Module-4
+
+1. Check that it is possible to connect from the Local Host to the Control Node using 'ssh USERNAME@Control-IP-Address'
+2. On the local host use 'ssh-keygen' to create a SSH key pair if required.
+3. Then use 'ssh-copy-id USERNAME@Control-IP-Address' to allow ssh communication between the Local Host and the Control Node without the need of a password.
+4. Connect the Local Host to the Control Node using 'ssh' and confirm that Ansible is install using 'Ansible --version'.
+5. Install Ansible if necessary using 'sudo pip install ansible'.
+6. Check that it is possible to connect from the Control Node to the Managed Node using 'ssh USERNAME@Managed-IP-Address'.
+7. 'Exit' from the Managed Node to the Control Node.
+8. On the Control Node use 'ssh-keygen' to create a SSH key pair.
+9. Then use 'ssh-copy-id USERNAME@Managed-IP-Address' to allow ssh connection to the Control Node to the Managed Node without the need of a password.
+10. Get copies of the 'my-ansible-inventory' and 'my-ansible-playbook.yml' files from the GIT repository to the Local Host.
+11. Check that the IP Address in the 'my-ansible-inventory' matches the Managed Node and modify if necessary.
+12. Using a suitable utility such as 'scp' copy these files to the Control Node where the destination path will be '/home/USERNAME'
+13. Connect to the Control Node if necessary
+14. On the Control Node run the following command 'ansible-playbook my-ansible-playbook.yml -i my-ansible-inventory'
+15. Upon request enter the Trello API Key to be used.
+16. Upon request enter the Trello API Token to be used
+17. This should install and configure all the items needed to complete the deployment to the Managed Node
+18. Check for and resolve any errors reported
+19. On the Local Host confirm that the application is running by browsing to 'http://Managed-IP-Address:5000/'
+
