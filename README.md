@@ -148,3 +148,29 @@ Module-4
 18. Check for and resolve any errors reported
 19. On the Local Host confirm that the application is running by browsing to 'http://Managed-IP-Address:5000/'
 
+Module-5 
+
+The Docker file contains all of the Docker information to create a production build using Gunicorn and a development build using
+Flask.
+
+To create a production build the following command line needs to be executed.
+$ docker build --target production --tag todo_app:prod .
+
+And to create a development build the following following command line needs to be executed.
+$ docker build --target development --tag todo_app:dev .
+
+In both cases the '.' at the end of the comment line is required.
+
+To run the Docker images created the following command lines are are required.
+For production
+$ docker run -p 5000:5000 --env-file ./.env -it todo_app:prod
+
+For development
+$ docker run -p 5000:5000 --env-file ./.env -it todo_app:dev
+
+If required it is possible to make changes to the Python files while a development build is running which will automatically be
+applied to the Docker container. To do this the following command line can be used.
+$ docker run -p 5000:5000 --env-file ./.env -it --mount type=bind,source="$(pwd)"/todo_app,target=/myapp/todo_app todo_app:dev
+
+As no secrets are to be copied in the build images a list of files not to be copied to the container has been added to a 
+.dockerignore files
