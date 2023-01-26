@@ -1,0 +1,9 @@
+./.env
+./.vscode
+./.env.test
+./.git
+./.github
+./ansible
+./tests
+./README.md
+./.venv
