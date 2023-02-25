@@ -4,6 +4,5 @@
 ./.git
 ./.github
 ./ansible
-./tests
 ./README.md
 ./.venv
