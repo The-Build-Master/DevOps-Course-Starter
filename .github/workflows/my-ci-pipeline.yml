@@ -1,5 +1,17 @@
 name: Continuous Integration 
-on: [push] 
+on: 
+  push:
+    paths-ignore:
+      - 'README.*'
+      - 'documents/**'
+      - 'ansible/**'
+
+  pull_request:
+    paths-ignore:
+      - 'README.*'
+      - 'documents/**'
+      - 'ansible/**'
+
 jobs: 
   build: 
     name: Build and test 
