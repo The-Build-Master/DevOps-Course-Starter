@@ -174,3 +174,18 @@ $ docker run -p 5000:5000 --env-file ./.env -it --mount type=bind,source="$(pwd)
 
 As no secrets are to be copied in the build images a list of files not to be copied to the container has been added to a 
 .dockerignore files
+
+Module-7
+
+The Dockerfile has been modified to allow for automated testing when using the GIT 'push' and 'pull_request' process by adding a 
+'test' target to the file.
+For this to function a test image is required and can be built using the following command
+$ docker build --target test --tag my-test-image .
+
+To confirm that the tests run correctly use the following command
+$ docker run --env-file .env.test my-test-image
+
+Changes to some file and folders will not trigger the automated testing.
+
+Results of the GIT processes the result should appear in the GitHub actions section
+ 
