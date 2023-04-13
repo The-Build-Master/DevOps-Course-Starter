@@ -189,3 +189,36 @@ Changes to some file and folders will not trigger the automated testing.
 
 Results of the GIT processes the result should appear in the GitHub actions section
  
+
+Module-8
+
+Docker Hub container = 'thebuildmaster/todo_app_prod:latest'
+
+To create and run the Web App follow the instructions below.
+
+Login to the Azure Portal.
+Select the create a ‘Web App’ option in the ‘Create Resource’ blade.
+On the new screen select the appropriate ‘subscription’ and ‘Resource Group‘. This information should have been provided.
+Select a unique name for the Web App. A green tick will indicate if the one entered is acceptable.
+Select the ‘Docker container’ radio button for the publish option.
+The select the ‘Linux’ radio button for the ‘Operating system’
+Set the ‘Region’ to ‘UK West’.
+A new Linux Plan will automatically be created but make sure that the Pricing Plan is set to ‘Basic B1’
+
+On the next screen Set the Option drop down to ‘Single Container’ and the Image soured to ‘Docker Hub’
+If the access type is Private suitable credentials will need to be provided.
+Enter the ‘Image and Tag‘ details which will be ‘thebuildmaster/todo_app_prod:latest’ in this case.
+Enter the start up command to ‘run -p 5000:5000 --env-file ./.env -it todo_app_prod’
+
+Select the ‘Review + create’ option.
+
+Once the resource has been created go to the ‘Deployment Centre’ screen in the resource and make note of the ‘Webhook URL’ as this will be needed later.
+
+Before starting the Web App go to the ‘Configuration’ screen. In here enter name / value pairs which are defined in the .env file.
+For example ‘FLASK_ENV=development’ would be entered as Name = FLASK_ENV and Value = development.
+
+Save these changes and then start the Web App. This may take some time to complete. There are a number of that will indicate the deployment status.
+
+Then the browse to the Web App. The URL can be located on the Web App Overview page.
+If the Web App errors it may be necessary to add an entry to the Configuration list with the Name of WEBSITE_PORT and the Value of the Port number being used by the application which is 5000 in this case.
+

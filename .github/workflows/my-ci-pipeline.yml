@@ -3,13 +3,13 @@ on:
   push:
     paths-ignore:
       - 'README.*'
-      - 'documents/**'
+      - 'documentation/**'
       - 'ansible/**'
 
   pull_request:
     paths-ignore:
       - 'README.*'
-      - 'documents/**'
+      - 'documentation/**'
       - 'ansible/**'
 
 jobs: 
