@@ -24,9 +24,10 @@ jobs:
   job-two:
     name: Publish
     needs: build
-    if: ${{ github.event_name == 'push' && github.ref == 'Module-9' }}
+    if: ${{ github.event_name == 'push' }}
     runs-on: ubuntu-latest
     steps: 
       # set username and password as secret values in github repository?
+        - run: echo {{ github.ref}}
         - run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_USERPWD }}
         - run: echo Publishing!
