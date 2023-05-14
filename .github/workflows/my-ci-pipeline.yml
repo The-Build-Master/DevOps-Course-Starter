@@ -27,8 +27,9 @@ jobs:
     if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/Module-9' }}
     runs-on: ubuntu-latest
     steps: 
-      # set username and password as secret values in github repository
         - run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_USERPWD }}
+        - run: docker build --target production --tag thebuilbmaster/production:latest .
+        - run: docker push thebuilbmaster/production:latest
         - run: echo Publishing Start!
         - run: curl -dH -X POST '${{ secrets.AZURE_WEBHOOK }}'
         - run: echo Punishing End!
