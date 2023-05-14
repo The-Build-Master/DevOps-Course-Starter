@@ -24,12 +24,12 @@ jobs:
   job-two:
     name: Publish
     needs: build
-    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/Module-9' }}
     runs-on: ubuntu-latest
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/Module-9' }}
     steps: 
         - run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_USERPWD }}
-        - run: docker build --target production --tag thebuildmaster/production .
-        - run: docker push thebuildmaster/production
+        - run: docker build --target production --tag thebuildmaster/todo_app_prod:latest .
+        - run: docker push thebuildmaster/todo_app_prod:latest
         - run: echo Publishing Start!
         - run: curl -dH -X POST '${{ secrets.AZURE_WEBHOOK }}'
         - run: echo Punishing End!
