@@ -20,4 +20,17 @@ jobs:
       - uses: actions/checkout@v2 
       - run: docker build --target test --tag my-test-image .
       - run: docker run --env-file .env.test my-test-image
-      
+
+  job-two:
+    name: Publish
+    needs: build
+    runs-on: ubuntu-latest
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+    steps: 
+        - uses: actions/checkout@v2      
+        - run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_USERPWD }}
+        - run: docker build --target production --tag thebuildmaster/todo_app_prod:latest .
+        - run: docker push thebuildmaster/todo_app_prod:latest
+        - run: echo Publishing Start!
+        - run: curl -dH -X POST '${{ secrets.AZURE_WEBHOOK }}'
+        - run: echo Punishing End!
