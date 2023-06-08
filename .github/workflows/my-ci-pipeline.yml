@@ -25,7 +25,7 @@ jobs:
     name: Publish
     needs: build
     runs-on: ubuntu-latest
-    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/Module-9' }}
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
     steps: 
         - uses: actions/checkout@v2      
         - run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_USERPWD }}
